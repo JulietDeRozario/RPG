@@ -128,8 +128,10 @@ class Game {
     let victim;
     if(choice == "1" || player instanceof Fighter || player instanceof Paladin || player instanceof Assassin || player instanceof CustomCharacter){
       victim = game.chooseTarget(player);
+      // If the entree is not valid
+      if(victim == undefined){console.log("Cet ennemi n'existe pas"); victim = game.chooseTarget(player)}
       if(victim.hp <= 0){
-        window.alert("Vous attaquez un mort...")
+        window.alert("Vous attaquez un mort...");
         return true;
       }
     }
@@ -159,8 +161,6 @@ class Game {
     })
     let target = prompt(`${player.name}, qui attaquez-vous ? (1/2...)`);
     let victim = Character.allPlayers.find(player => Character.allPlayers.indexOf(player).toString() == target);
-    // If the entree is not valid
-    if(victim == undefined){console.log("Cet ennemi n'existe pas"); game.chooseTarget(player) }
     // If the player wants to hit himself
     if(victim == player){window.alert(`${player.name} a décider de s'infliger un coup`)}
     return victim;
