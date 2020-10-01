@@ -3,9 +3,48 @@
   <head>
     <meta charset="utf-8">
     <title>RPG</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+    <script src="JavaScript/jquery-1.6.1.min.js" type="text/javascript"></script>
   </head>
 
   <body>
+    <div id="alert"></div>
+    <div id="form">
+      <h2 class="text-center">Création d'un héros</h2>
+      <form>
+        <div class="form-group">
+          <label for="InputFirstName">Nom</label>
+          <input type="text" class="form-control" id="name" placeholder="Entrez le nom de votre héros">
+        </div>
+        <hr>
+        <h5>Stats: </h5>
+        <br>
+        <div class="form-row align-items-center">
+          <div class= "col-sm-4">
+            <div class="form-group">
+              <label for="InputLastName">Points de vie</label>
+              <input type="number" class="form-control" id="hp" placeholder="nombre">
+            </div>
+          </div>
+          <div class= "col-sm-4">
+            <div class="form-group">
+              <label for="InputLastName">Points d'attaque</label>
+              <input type="number" class="form-control" id="dmg" placeholder="nombre">
+            </div>
+          </div>
+          <div class= "col-sm-4">
+            <div class="form-group">
+              <label for="InputLastName">Points de mana</label>
+              <input type="number" class="form-control" id="mana" placeholder="nombre">
+            </div>
+          </div>
+        </div>
+        <br>
+        <button type="button" id="submit" class="btn btn-block btn-primary">Jouer</button>
+      </form>
+    </div>
+
     <script src="game.js"></script>
     <script src="character.js"></script>
     <script src="fighter.js"></script>
@@ -14,6 +53,7 @@
     <script src="berzercker.js"></script>
     <script src="assassin.js"></script>
     <script src="rpg.js"></script>
+
   </body>
 
 </html>

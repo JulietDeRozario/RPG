@@ -1,7 +1,8 @@
 class Assassin extends Character {
-  constructor(name, hp=6, dmg=6, mana=20, status="playing", defense=false){
+  constructor(name, hp=6, dmg=6, mana=20, status="playing", defense=false, cost="20 mana"){
     super(name, hp, dmg, mana, status);
     this.defense = defense;
+    this.cost = cost;
   };
 
   specialAttack = (victim) => {
@@ -16,8 +17,8 @@ class Assassin extends Character {
 
       if(victim.hp > 0){
         console.log(`Vous n'avez pas tué ${victim}, vous perdez 7 points de vie!`);
-        this.hp - 7;
+        this.hp -= 7;
       };
     };
-  }
+  };
 };

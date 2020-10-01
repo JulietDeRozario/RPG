@@ -6,13 +6,65 @@ class Game {
   }
 
   startGame = () => {
-    let answer = confirm("Voulez-vous faire une partie?")
+    let answer = confirm("Voulez-vous faire une partie?");
     if(answer == true){
-      this.startTurn();
+      let new_character = confirm("Voulez-vous créer un nouveau personnage?");
+      if(new_character){
+        this.createPlayer();
+      }else{
+        this.startTurn();
+      };
     }else{
       alert("Au revoir!");
       return false;
     };
+  }
+
+  createPlayer = () => {
+    form.style.visibility = "visible";
+    submit.onclick = function submit() {
+      stats = Array.from(document.querySelectorAll('form input')).reduce((acc, input) => ({...acc, [input.id]: input.value}), {});
+      console.log(stats);
+      let values = Object.values(stats);
+      let empty_values = [];
+      values.map(function is_there_empty_values(value) {
+          if(value == "" ) {
+            empty_values.push(value);
+          };
+      });
+      if(empty_values.length > 0 || Math.round(stats["hp"]) <= 0 || Math.round(stats["hp"]) > 20 || Math.round(stats["dmg"]) <= 0 || Math.round(stats["dmg"]) > 15 || Math.round(stats["mana"]) < 0 || Math.round(stats["mana"]) > 200){
+        error();
+      }else{
+        new Character(stats["name"], Math.round(stats["hp"]), Math.round(stats["dmg"]), Math.round(stats["mana"]));
+        console.log("*******Votre personnage a été créé avec succès!*********");
+        form.style.visibility = "hidden";
+        game.startTurn();
+      }
+    };
+
+    function error() {
+      let message = ""
+      if(stats["name"] == "") {
+        message = "Vous devez remplir le nom de votre héros"
+      }else if(Math.round(stats["hp"]) <= 0 || Math.round(stats["hp"]) > 20){
+        message = "Les pv de votre héros doivent être compris entre 1 et 20"
+      }else if(Math.round(stats["dmg"]) <= 0 || Math.round(stats["dmg"]) > 15){
+        message = "Les pa de votre héros doivent être compris entre 1 et 15"
+      }else if(Math.round(stats["mana"]) < 0 || Math.round(stats["mana"]) > 200) {
+        message = "Le mana de votre héros doit être compris entre 0 et 200"
+      };
+      alert.className = "alert alert-danger alert-dismissible fade show";
+      alert.innerHTML = message + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+      closeAlert();
+    };
+
+    function closeAlert() {
+      let close = document.querySelector('.close');
+      close.onclick = function() {
+        alert.className="";
+        alert.innerHTML=""
+      };
+    }
   }
 
   startTurn = () => {
@@ -34,7 +86,7 @@ class Game {
   }
   
   skipTurn = () => {
-    console.clear();
+    setTimeout(console.clear(), 3000); 
     this.turnLeft -- ;
     if(Character.allPlayers.filter(player => player.status == "playing").length > 1 && this.turnLeft > 0){
       this.startTurn();
@@ -49,7 +101,7 @@ class Game {
       if(player.hp > 0){
         console.log("_____________________________________________________")
         console.log(`C'est au tour de ${player.name} de jouer:`);
-        let choice = prompt(`${player.name}, que faites-vous ? (1/2)\n1- Attaquer un autre joueur\n2- Utiliser ma capacité spéciale`);
+        let choice = prompt(`${player.name}, que faites-vous ? (1/2)\n\n1- Attaquer un autre joueur\n2- Utiliser ma capacité spéciale (${player.cost})\n\nStats: ${player.hp} pv / ${player.dmg} pa / ${player.mana} mana`);
         let victim;
 
         if(choice == "1" || player instanceof Fighter || player instanceof Paladin || player instanceof Assassin){
@@ -74,7 +126,7 @@ class Game {
         }else{
           alert("Commande invalide, votre joueur est atteint d'une crise d'epillepsie et passe son tour");
         };
-      }; 
+      };
     });
 
     function killed(victim, player){
@@ -83,7 +135,6 @@ class Game {
         console.log(`${player.name} gagne 20 points de mana!`)
       }
     }
-
     this.skipTurn();
   };
 

@@ -1,7 +1,8 @@
 class Fighter extends Character {
-  constructor(name, hp=12, dmg=4, mana=40, status="playing", defense=false){
+  constructor(name, hp=12, dmg=4, mana=40, status="playing", defense=false, cost="20 mana"){
     super(name, hp, dmg, mana, status);
     this.defense = defense;
+    this.cost = cost;
   };
 
   specialAttack = (victim) => {
@@ -13,7 +14,6 @@ class Fighter extends Character {
       this.mana = this.mana - 20;
       this.defense = true;
       victim.takeDamage(5);
-    }
-    
-  }
+    };
+  };
 };

@@ -13,7 +13,6 @@ class Character {
 
   dealDamage = (victim) => {
     console.log(`${this.name} attaque ${victim.name} et lui inflige ${this.dmg} dégats!`);
-    attack_sound.play();
     victim.takeDamage(this.dmg);
   }
 
@@ -25,6 +24,7 @@ class Character {
       damage = 0
       console.log(`${this.name} ne subit aucun dégat`)
     }
+    attack_sound.play();
     this.hp = this.hp - damage;
 
     if(this.hp <= 0){
