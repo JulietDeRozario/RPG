@@ -5,7 +5,7 @@ This is a JS training from the bootcamp The Hacking Project-Next.
 Download the zip file (Clone => download zip)
 
 ## How to play
-Open the index.html file in your browser, open your JS console, and enjoy !
+Open the index.html folder in your browser, open your JS console, and enjoy !
 
 ### CopyRight Lol astéroïde 2020
 
