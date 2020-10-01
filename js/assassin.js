@@ -16,7 +16,7 @@ class Assassin extends Character {
       victim.takeDamage(this.dmg + 7);
 
       if(victim.hp > 0){
-        console.log(`Vous n'avez pas tué ${victim}, vous perdez 7 points de vie!`);
+        console.log(`Vous n'avez pas tué ${victim.name}, vous perdez 7 points de vie!`);
         this.hp -= 7;
       };
     };

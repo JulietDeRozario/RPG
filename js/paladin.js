@@ -8,7 +8,7 @@ class Paladin extends Character {
     if(this.mana < 40){
       window.alert(`${this.name} n'a pas assez de mana pour attaquer`);
     }else{
-      window.alert(`${this.name} utilise Lighting!`);
+      window.alert(`${this.name} utilise Lighting\n${this.name} gagne 5pv!`);
       console.log(`${this.name} attaque ${victim.name} et lui infliges 4 dégats!`);    
       this.mana = this.mana - 40;
       this.hp = this.hp + 5;

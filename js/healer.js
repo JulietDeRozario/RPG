@@ -10,7 +10,7 @@ class Healer extends Character {
     }else{
       window.alert(`${this.name} utilise son coup spécial et gagne 8 points de vie!`);
       this.mana = this.mana - 25;
-      this.hp = this.hp + 8;
+      this.hp += 8;
       console.log(`${this.name} a gagné 8 pv!`);
     };
   };

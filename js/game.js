@@ -21,6 +21,7 @@ class Game {
   }
 
   createPlayer = () => {
+    masthead.style.visibility = "hidden";
     form.style.visibility = "visible";
     submit.onclick = function submit() {
       stats = Array.from(document.querySelectorAll('form input')).reduce((acc, input) => ({...acc, [input.id]: input.value}), {});
@@ -35,9 +36,10 @@ class Game {
       if(empty_values.length > 0 || Math.round(stats["hp"]) <= 0 || Math.round(stats["hp"]) > 20 || Math.round(stats["dmg"]) <= 0 || Math.round(stats["dmg"]) > 15 || Math.round(stats["mana"]) < 0 || Math.round(stats["mana"]) > 200){
         error();
       }else{
-        new Character(stats["name"], Math.round(stats["hp"]), Math.round(stats["dmg"]), Math.round(stats["mana"]));
+        new CustomCharacter(stats["name"], Math.round(stats["hp"]), Math.round(stats["dmg"]), Math.round(stats["mana"]));
         console.log("*******Votre personnage a été créé avec succès!*********");
         form.style.visibility = "hidden";
+        masthead.style.visibility = "visible";
         game.startTurn();
       }
     };
@@ -104,7 +106,7 @@ class Game {
         let choice = prompt(`${player.name}, que faites-vous ? (1/2)\n\n1- Attaquer un autre joueur\n2- Utiliser ma capacité spéciale (${player.cost})\n\nStats: ${player.hp} pv / ${player.dmg} pa / ${player.mana} mana`);
         let victim;
 
-        if(choice == "1" || player instanceof Fighter || player instanceof Paladin || player instanceof Assassin){
+        if(choice == "1" || player instanceof Fighter || player instanceof Paladin || player instanceof Assassin || player instanceof CustomCharacter){
           console.log("Quelle est votre cible ?");
           Character.allPlayers.forEach((enemy) => {
             if (enemy != player && enemy.hp > 0){
@@ -119,9 +121,11 @@ class Game {
           player.dealDamage(victim);
           killed(victim, player);
         }else if(choice == "2" && player instanceof Healer != true && player instanceof Berzerker != true ){
+          special_attack_soud.play();
           player.specialAttack(victim);
           killed(victim, player);
         }else if(choice == "2" && (player instanceof Healer == true || player instanceof Berzerker == true)){
+          special_attack_soud.play();
           player.specialAttack();
         }else{
           alert("Commande invalide, votre joueur est atteint d'une crise d'epillepsie et passe son tour");

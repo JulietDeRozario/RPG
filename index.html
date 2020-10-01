@@ -1,69 +1,228 @@
 <!DOCTYPE html>
-<html>
-​
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>RPG</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="main.css">
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Motherfucking RPG</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <!--Main-->
+    <link rel="stylesheet" href="css/main.css">
 </head>
-​
-<body>
-  <div id="alert"></div>
-  <div id="form">
-    <h2 class="text-center">Création d'un héros</h2>
-    <form>
-      <div class="form-group">
-        <label for="InputFirstName">Nom</label>
-        <input type="text" class="form-control" id="name" placeholder="Entrez le nom de votre héros">
-      </div>
-      <hr>
-      <h5>Stats: </h5>
-      <br>
-      <div class="form-row align-items-center">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <label for="InputLastName">Points de vie</label>
-            <input type="number" class="form-control" id="hp" placeholder="nombre">
-          </div>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Motherfucking RPG</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Jouer</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#guys">Les personnages</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="col-sm-4">
-          <div class="form-group">
-            <label for="InputLastName">Points d'attaque</label>
-            <input type="number" class="form-control" id="dmg" placeholder="nombre">
-          </div>
+    </nav>
+    <div id="alert"></div>
+    <div id="form">
+        <h2 class="text-center">Création d'un héros</h2>
+        <form>
+            <div class="form-group">
+                <label for="InputFirstName">Nom</label>
+                <input type="text" class="form-control" id="name" placeholder="Entrez le nom de votre héros">
+                </div>
+                <hr>
+                <h5>Stats: </h5>
+                <br>
+                <div class="form-row align-items-center">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                    <label for="InputLastName">Points de vie</label>
+                    <input type="number" class="form-control" id="hp" placeholder="nombre">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                    <label for="InputLastName">Points d'attaque</label>
+                    <input type="number" class="form-control" id="dmg" placeholder="nombre">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                    <label for="InputLastName">Points de mana</label>
+                    <input type="number" class="form-control" id="mana" placeholder="nombre">
+                    </div>
+                </div>
+                </div>
+                <br>
+                <button type="button" id="submit" class="btn btn-block btn-primary">Jouer</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container d-flex h-100 align-items-center">
+            <div class="mx-auto text-center">
+                <h1 class="mx-auto my-0 text-uppercase">The Motherfucking RPG</h1>
+                <h2 class="text-white-50 mx-auto mt-2 mb-5">Ouvre ta console, rejoins la bataille, terasse tes ennemis
+                    et sois le dernier survivant.</h2>
+                <a class="btn btn-primary" id="play">Jouer</a>
+            </div>
         </div>
-        <div class="col-sm-4">
-          <div class="form-group">
-            <label for="InputLastName">Points de mana</label>
-            <input type="number" class="form-control" id="mana" placeholder="nombre">
-          </div>
+    </header>
+    <!-- About-->
+    <section class="about-section text-center" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-white mb-4">Le jeu en console JavaScript</h2>
+                    <p class="text-white-50">
+                        Pour jouer, ouvre ta console JavaScript (Ctrl+Shift+J ou I / maj F12), et clique sur "Jouer".<br>
+                    </p>
+                </div>
+            </div>
+            <img class="img-fluid" src="assets/img/fantasy.png" alt="" />
         </div>
-      </div>
-      <br>
-      <button type="button" id="submit" class="btn btn-block btn-primary">Jouer</button>
-    </form>
-  </div>
-​
-  <script src="game.js"></script>
-  <script src="character.js"></script>
-  <script src="fighter.js"></script>
-  <script src="paladin.js"></script>
-  <script src="healer.js"></script>
-  <script src="berzercker.js"></script>
-  <script src="assassin.js"></script>
-  <script src="rpg.js"></script>
-​
+    </section>
+    <!-- Personnages-->
+    <section class="projects-section bg-light" id="projects">
+        <hr>
+        <div class="container">
+            <h3 class="text-center mb-5" id="guys">Les personnages du donjon</h3>
+            <!--Row-->
+            <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+                <div class="col-lg-6"><img class="img-fluid" src="assets/img/fighter.jpeg" alt="" /></div>
+                <div class="col-lg-6">
+                    <div class="bg-black text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-left">
+                                <h4 class="text-white">Grace</h4>
+                                <p class="mb-0 text-white-50">
+                                    <strong>Guerrière:</strong> 12pv, 4 points d'attaque, 40 points de mana.<br>
+                                    <strong>Coup spécial:</strong> Dark Vision inflige 5 dégats à un adversaire et réduits les dommage de Grace de 2 jusqu'à la fin du tour (20 mana).<br>
+                                </p>
+                                <hr class="d-none d-lg-block mb-0 ml-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Row-->
+            <div class="row justify-content-center no-gutters">
+                <div class="col-lg-6"><img class="img-fluid" src="assets/img/paladin.jpeg" alt="" /></div>
+                <div class="col-lg-6 order-lg-first">
+                    <div class="bg-black text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-right">
+                                <h4 class="text-white">Ulder</h4>
+                                <p class="mb-0 text-white-50">
+                                    <strong>Paladin:</strong> 16pv, 3 points d'attaque, 160 points de mana.<br>
+                                    <strong>Coup spécial:</strong> Lighting inflige 4 dégats à un adversaire et soigne Ulder de 5 points de vie (40 mana).<br>
+                                </p>
+                                <hr class="d-none d-lg-block mb-0 mr-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Row-->
+            <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+                <div class="col-lg-6"><img class="img-fluid" src="assets/img/healer.jpeg" alt="" /></div>
+                <div class="col-lg-6">
+                    <div class="bg-black text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-left">
+                                <h4 class="text-white">Moana</h4>
+                                <p class="mb-0 text-white-50">
+                                    <strong>Guérisseuse:</strong> 8pv, 2 points d'attaque, 200 points de mana.<br>
+                                    <strong>Coup spécial:</strong>  Moana se soigne de 8 points de vie (25 mana).<br>
+                                </p>
+                                <hr class="d-none d-lg-block mb-0 ml-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Row-->
+            <div class="row justify-content-center no-gutters">
+                <div class="col-lg-6"><img class="img-fluid" src="assets/img/berzercker.jpeg" alt="" /></div>
+                <div class="col-lg-6 order-lg-first">
+                    <div class="bg-black text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-right">
+                                <h4 class="text-white">Draven</h4>
+                                <p class="mb-0 text-white-50">
+                                    <strong>Barbare:</strong> 8pv, 3 points d'attaque, 0 points de mana.<br>
+                                    <strong>Coup spécial:</strong> Draven gagne un point d'attaque pour le reste de la partie (1pv).<br>
+                                </p>
+                                <hr class="d-none d-lg-block mb-0 mr-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Row-->
+            <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+                <div class="col-lg-6"><img class="img-fluid" src="assets/img/assassin.jpeg" alt="" /></div>
+                <div class="col-lg-6">
+                    <div class="bg-black text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-left">
+                                <h4 class="text-white">Carl</h4>
+                                <p class="mb-0 text-white-50">
+                                    <strong>Assassin:</strong> 6pv, 6 points d'attaque, 20 points de mana.<br>
+                                    <strong>Coup spécial:</strong> Carl inflige 7 dégats supplémentaires à l'ennemi, et ne subit aucun dégats au prochain tour.
+                                    Si sa cible ne meurt pas sur le coup, il subit aussi 7 dégats (20 mana).<br>
+                                </p>
+                                <hr class="d-none d-lg-block mb-0 ml-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer-->
+    <footer class="footer bg-black small text-center text-white-50">
+        <div class="container">Copyright © Lol astéroïde 2020</div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- Game js-->
+    <script src="js/game.js"></script>
+    <script src="js/character.js"></script>
+    <script src="js/fighter.js"></script>
+    <script src="js/paladin.js"></script>
+    <script src="js/healer.js"></script>
+    <script src="js/berzercker.js"></script>
+    <script src="js/assassin.js"></script>
+    <script src="js/custom_character.js"></script>
+    <script src="js/rpg.js"></script>
 </body>
-​
+
 </html>
