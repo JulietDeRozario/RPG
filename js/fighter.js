@@ -3,7 +3,7 @@ class Fighter extends Character {
     super(name, hp, dmg, mana, status);
     this.defense = defense;
     this.cost = cost;
-  };
+  }
 
   specialAttack = (victim) => {
     if(this.mana < 20){
@@ -11,9 +11,9 @@ class Fighter extends Character {
     }else{
       console.log(`${this.name} attaque ${victim.name} et lui inflige 5 dégats!`);
       window.alert(`${this.name} utilise Dark Vision!\nLes dégats subits par ${this.name} sont réduits de 2 jusqu'à la fin du tour`);
-      this.mana = this.mana - 20;
+      this.mana -= 20;
       this.defense = true;
       victim.takeDamage(5);
-    };
-  };
-};
+    }
+  }
+}

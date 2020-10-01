@@ -13,14 +13,12 @@ class Character {
 
   dealDamage = (victim) => {
     attack_sound.play();
-    if(victim.hp <= 0){
-      console.log("Vous attaquez un mort...")
-    }
     console.log(`${this.name} attaque ${victim.name} et lui inflige ${this.dmg} dégats!`);
     victim.takeDamage(this.dmg);
   }
 
   takeDamage = (damage) => {
+    // Check if a Fighter is protected by his special attack
     if(this instanceof Fighter && this.defense == true){
       damage = damage - 2;
       console.log("Dark Vision réduit ces dégats de 2")
@@ -29,13 +27,18 @@ class Character {
       console.log(`${this.name} ne subit aucun dégat`)
     }
     this.hp = this.hp - damage;
+    this.checkIfIsDead();
+  }
 
+  checkIfIsDead = () => {
     if(this.hp <= 0){
       console.log(`${this.name} est mort.`);
       this.status = "loser";
       death_sound.play();
+      return true;
     }else{
-      console.log(`${this.name} n'a plus que ${this.hp} points de vie.`)
+      console.log(`${this.name} n'a plus que ${this.hp} points de vie.`);
+      return false;
     }
-  };
-};
+  }
+}
