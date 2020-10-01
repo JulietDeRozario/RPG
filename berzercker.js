@@ -5,7 +5,7 @@ class Berzerker extends Character {
   };
 
   specialAttack = () => {
-    alert(`${this.name} utilise son coup spécial et gagne 1 point d'attaque!`);
+    window.alert(`${this.name} utilise son coup spécial et gagne 1 point d'attaque!`);
     this.hp = this.hp - 1;
     this.dmg = this.dmg + 1;
     console.log(`${this.name} gagne 1 point d'attaque!`);

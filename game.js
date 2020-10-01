@@ -15,7 +15,7 @@ class Game {
         this.startTurn();
       };
     }else{
-      alert("Au revoir!");
+      window.alert("Au revoir!");
       return false;
     };
   }

@@ -6,9 +6,9 @@ class Healer extends Character {
 
   specialAttack = () => {
     if(this.mana < 25){
-      alert(`${this.name} n'a pas assez de mana pour attaquer`);
+      window.alert(`${this.name} n'a pas assez de mana pour attaquer`);
     }else{
-      alert(`${this.name} utilise son coup spécial et gagne 8 points de vie!`);
+      window.alert(`${this.name} utilise son coup spécial et gagne 8 points de vie!`);
       this.mana = this.mana - 25;
       this.hp = this.hp + 8;
       console.log(`${this.name} a gagné 8 pv!`);

@@ -6,9 +6,9 @@ class Paladin extends Character {
 
   specialAttack = (victim) => {
     if(this.mana < 40){
-      confirm(`${this.name} n'a pas assez de mana pour attaquer`);
+      window.alert(`${this.name} n'a pas assez de mana pour attaquer`);
     }else{
-      confirm(`${this.name} utilise Lighting!`);
+      window.alert(`${this.name} utilise Lighting!`);
       console.log(`${this.name} attaque ${victim.name} et lui infliges 4 dégats!`);    
       this.mana = this.mana - 40;
       this.hp = this.hp + 5;

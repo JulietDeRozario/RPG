@@ -7,9 +7,9 @@ class Assassin extends Character {
 
   specialAttack = (victim) => {
     if(this.mana < 20){
-      alert(`${this.name} n'a pas assez de mana pour attaquer`);
+      window.alert(`${this.name} n'a pas assez de mana pour attaquer`);
     }else{
-      alert(`${this.name} utilise son coup spécial!\n${this.name} sera intouchable au prochain tour`);
+      window.alert(`${this.name} utilise son coup spécial!\n${this.name} sera intouchable au prochain tour`);
       console.log(`${this.name} attaque ${victim.name} et lui inflige ${this.dmg + 7} dégats!`);
       this.mana = this.mana - 20;
       this.defense = "charging";
