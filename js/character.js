@@ -32,7 +32,7 @@ class Character {
 
   checkIfIsDead = () => {
     if(this.hp <= 0){
-      console.log(`${this.name} est mort.`);
+      console.log(`%c ${this.name} est mort.`, "color:red;");
       this.status = "loser";
       death_sound.play();
       return true;

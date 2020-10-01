@@ -9,7 +9,7 @@ class Game {
     let answer = confirm("Voulez-vous faire une partie?");
     if(answer == true){
       let new_character = confirm("Voulez-vous créer un nouveau personnage?");
-      if(new_character){
+      if(new_character){{mana, name}
         this.createPlayer();
       }else{
         this.startTurn();
@@ -34,20 +34,20 @@ class Game {
 
   isThereErrors = (values) => {
     let empty_values = [];
+    const {hp, dmg, mana, name} = stats;
     // Check if there is no empty value
-    values.map((value) => {
+    for(let value of values){
       if(value == "" ) {
         empty_values.push(value);
       }
-    })
-
+    }
     // If there is an empty value, or if a stat is invalid, it will return an error message
-    if(empty_values.length > 0 || Math.round(stats["hp"]) <= 0 || Math.round(stats["hp"]) > 20 || Math.round(stats["dmg"]) <= 0 || Math.round(stats["dmg"]) > 15 || Math.round(stats["mana"]) < 0 || Math.round(stats["mana"]) > 200){
+    if(empty_values.length > 0 || Math.round(hp) <= 0 || Math.round(hp) > 20 || Math.round(dmg) <= 0 || Math.round(dmg) > 15 || Math.round(mana) < 0 || Math.round(mana) > 200){
       game.creationErrors(stats);
     }else{
       // If the form entrees are valid, a new character is created
-      new CustomCharacter(stats["name"], Math.round(stats["hp"]), Math.round(stats["dmg"]), Math.round(stats["mana"]));
-      console.log("*******   Votre personnage a été créé avec succès!   *******");
+      new CustomCharacter(name, Math.round(hp), Math.round(dmg), Math.round(mana));
+      console.log("%c *******   Votre personnage a été créé avec succès!   *******", "color:green;");
       form.style.visibility = "hidden"; // the form disappears
       masthead.style.visibility = "visible";
       // The game starts
@@ -55,15 +55,15 @@ class Game {
     }
   }
 
-  creationErrors = (stats) => {
+  creationErrors = ({name, hp, dmg, mana}) => {
     let message = ""
-    if(stats["name"] == "") {
+    if(name == "") {
       message = "Vous devez remplir le nom de votre héros"
-    }else if(Math.round(stats["hp"]) <= 0 || Math.round(stats["hp"]) > 20){
+    }else if(Math.round(hp) <= 0 || Math.round(hp) > 20){
       message = "Les pv de votre héros doivent être compris entre 1 et 20"
-    }else if(Math.round(stats["dmg"]) <= 0 || Math.round(stats["dmg"]) > 15){
+    }else if(Math.round(dmg) <= 0 || Math.round(dmg) > 15){
       message = "Les pa de votre héros doivent être compris entre 1 et 15"
-    }else if(Math.round(stats["mana"]) < 0 || Math.round(stats["mana"]) > 200) {
+    }else if(Math.round(mana) < 0 || Math.round(mana) > 200) {
       message = "Le mana de votre héros doit être compris entre 0 et 200"
     };
     alert.className = "alert alert-danger alert-dismissible fade show";
@@ -84,15 +84,16 @@ class Game {
   }
 
   whoIsAlive = () => {
-    Character.allPlayers.map((player) => {
-      if(player.hp > 0){
-        console.log(`${player.name} est en vie`);
+    Character.allPlayers.map(player => {
+      const {hp, name, defense} = player;
+      if(hp > 0){
+        console.log(`${name} est en vie`);
         if(player instanceof Fighter){
           player.defense = false;
-        }else if(player instanceof Assassin && player.defense == true){
+        }else if(player instanceof Assassin && defense == true){
           player.defense = false;
-        }else if(player instanceof Assassin && player.defense == "charging"){
-          console.log(`${player.name} est protégé ce tour-ci`)
+        }else if(player instanceof Assassin && defense == "charging"){
+          console.log(`${name} est protégé ce tour-ci`)
           player.defense = true;
         }
       }
@@ -114,10 +115,11 @@ class Game {
     // Creation of a random sorted array with all players
     let random_call = Character.allPlayers.sort(function(a, b){return 0.5 - Math.random()});
     random_call.map((player) => {
-      if(player.hp > 0){
+      const{hp, name, cost, dmg, mana} = player;
+      if(hp > 0){
         console.log("_____________________________________________________");
-        console.log(`C'est au tour de ${player.name} de jouer:`);
-        let choice = prompt(`${player.name}, que faites-vous ? (1/2)\n\n1- Attaquer un autre joueur\n2- Utiliser ma capacité spéciale (${player.cost})\n\nStats: ${player.hp} pv / ${player.dmg} pa / ${player.mana} mana`);
+        console.log(`C'est au tour de ${name} de jouer:`);
+        let choice = prompt(`${name}, que faites-vous ? (1/2)\n\n1- Attaquer un autre joueur\n2- Utiliser ma capacité spéciale (${cost})\n\nStats: ${hp} pv / ${dmg} pa / ${mana} mana`);
         game.playerAction(player, choice);
       }
     })
@@ -128,20 +130,18 @@ class Game {
     let victim;
     if(choice == "1" || player instanceof Fighter || player instanceof Paladin || player instanceof Assassin || player instanceof CustomCharacter){
       victim = game.chooseTarget(player);
-      // If the entree is not valid
-      if(victim == undefined){console.log("Cet ennemi n'existe pas"); victim = game.chooseTarget(player)}
-      if(victim.hp <= 0){
-        window.alert("Vous attaquez un mort...");
-        return true;
-      }
     }
     if(choice == "1"){
-      player.dealDamage(victim);
-      game.didPlayerKilled(player, victim);
+      if(game.isTargetAlreadyDeead(victim) == false){
+        player.dealDamage(victim);
+        game.didPlayerKilled(player, victim);
+      }
     }else if(choice == "2" && player instanceof Healer != true && player instanceof Berzerker != true ){
       special_attack_soud.play();
-      player.specialAttack(victim);
-      game.didPlayerKilled(player, victim);
+      if(game.isTargetAlreadyDeead(victim) == false){
+        player.specialAttack(victim);
+        game.didPlayerKilled(player, victim);
+      }
     // Healers and Berzekers do not need a victim for their special attack
     }else if(choice == "2" && (player instanceof Healer == true || player instanceof Berzerker == true)){
       special_attack_soud.play();
@@ -154,7 +154,7 @@ class Game {
   chooseTarget = (player) => {
     console.log("Quelle est votre cible ?");
     // Logging all enemies attached to their index
-    Character.allPlayers.forEach((enemy) => {
+    Character.allPlayers.map(enemy => {
       if (enemy != player && enemy.hp > 0){
       console.log(`${Character.allPlayers.indexOf(enemy)}- ${enemy.name}.`);
       }
@@ -163,12 +163,24 @@ class Game {
     let victim = Character.allPlayers.find(player => Character.allPlayers.indexOf(player).toString() == target);
     // If the player wants to hit himself
     if(victim == player){window.alert(`${player.name} a décider de s'infliger un coup`)}
+    if(victim == undefined){
+      console.log("Cet ennemi n'existe pas"); 
+      victim = game.chooseTarget(player)
+    }
     return victim;
+  } 
+
+  isTargetAlreadyDeead = (target) => {
+    // If the entree is not valid
+    if(target.hp <= 0){
+      window.alert("Vous attaquez un mort...");
+      return true;
+    }else{return false}
   }
   
   didPlayerKilled = (player, victim) => {
     if(victim.checkIfIsDead()){
-      player.mana = player.mana + 20;
+      player.mana += 20;
       console.log(`${player.name} gagne 20 points de mana!`)
     }
   }
@@ -180,12 +192,12 @@ class Game {
       console.log(`Félicitations ${winner.name}, tu es le dernier survivant, tu gagnes!`);
     }else if(Character.allPlayers.filter(player => player.status == "playing").length > 1){
       console.log(`Félicitation à tous les survivants, vous avez survécu 10 tours dans le donjon, vous gagnez!`)
-      Character.allPlayers.forEach((player) => {
+      for (let player of Character.allPlayers) {
         if(player.status != "loser"){
           player.status = "winner"
           console.log(`Bravo ${player.name}!`)
         }
-      })
+      }
     }else{
       console.log("Tout le monde est mort, vous avez perdus.");
     }
